@@ -6,13 +6,15 @@ import { IMarkdown, IPostData } from "../types/posts";
 type IAllPost = IMarkdown & IPostData;
 const postsDirectory = path.join(process.cwd(), "data", "posts");
 
-export function getPostData(fileName: string): IAllPost {
-  const filePath = path.join(postsDirectory, fileName);
+export const getPostsFiles = () => fs.readdirSync(postsDirectory);
+
+export function getPostData(postIdentifier: string): IAllPost {
+  const filePath = path.join(postsDirectory, `${postIdentifier}.md`);
 
   const fileContent = fs.readFileSync(filePath, "utf-8");
   const { data, content } = matter(fileContent);
 
-  const postSlug = fileName.replace(/\.md$/, "");
+  const postSlug = postIdentifier.replace(/\.md$/, "");
 
   const postData = {
     slug: postSlug,
@@ -28,9 +30,9 @@ export function getPostData(fileName: string): IAllPost {
 }
 
 export function getAllPosts() {
-  const postFiles = fs.readdirSync(postsDirectory);
+  const postFiles = getPostsFiles();
   const allPosts = postFiles.map((postFile) => {
-    return getPostData(postFile);
+    return getPostData(postFile.replace(/\.md$/, ""));
   });
   const sortedPosts = allPosts.sort((postA, postB) =>
     postA.date > postB.date ? -1 : 1

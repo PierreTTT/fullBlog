@@ -1,6 +1,6 @@
 ---
 title: 'How to eat right'
-date: '2022-10-15'
+date: '2022-10-20'
 image: eatingRight.png
 description: Step to eat right
 isFeatured : true

@@ -1,16 +1,20 @@
 import ReactMarkdown from "react-markdown";
-import { DUMMY_POST } from "../../utils/DUMMY_DATA";
+import { IPost } from "../../types/posts";
 import classes from "./post-content.module.css";
 import PostHeader from "./post-header";
 
-function PostContent() {
-  const imagePath = `/images/${DUMMY_POST.image}`;
+interface IPostContentProps{
+  post:IPost;
+}
+
+function PostContent({post}:IPostContentProps) {
+  const imagePath = `/images/${post.image}`;
 
   return (
     <article className={classes.content}>
-      <PostHeader title={DUMMY_POST.title} image={imagePath} />
+      <PostHeader title={post.title} image={imagePath} />
       <ReactMarkdown>
-      {DUMMY_POST.content}
+      {post.description}
       </ReactMarkdown>
     </article>
   );
