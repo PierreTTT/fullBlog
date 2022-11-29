@@ -1,13 +1,13 @@
 import Image from "next/image";
 import Link from "next/link";
+import { IPost } from "../../types/posts";
 import classes from "./post.module.css";
-import { Post } from "./posts-grid";
 
-type PostProps = {
-  post: Post;
-};
+interface IPostProps {
+  post: IPost;
+}
 
-function Post(props: PostProps) {
+function Post(props: IPostProps) {
   const { title, image, description, date, slug } = props.post;
 
   const formattedDate = new Date(date).toLocaleDateString("en-US", {
@@ -17,19 +17,25 @@ function Post(props: PostProps) {
   });
 
   const imagePath = `/images/${image}`;
-  const linkPath = `/posts/${slug}`
+  const linkPath = `/posts/${slug}`;
 
   return (
     <li className={classes.post}>
       <Link href={linkPath}>
-          <div className={classes.image}>
-            <Image src={imagePath} alt={title} width={300} height={200} layout="responsive"/>
-          </div>
-          <div className={classes.content}>
-            <h3>{title}</h3>
-            <time>{formattedDate}</time>
-            <p>{description}</p>
-          </div>
+        <div className={classes.image}>
+          <Image
+            src={imagePath}
+            alt={title}
+            width={300}
+            height={200}
+            layout="responsive"
+          />
+        </div>
+        <div className={classes.content}>
+          <h3>{title}</h3>
+          <time>{formattedDate}</time>
+          <p>{description}</p>
+        </div>
       </Link>
     </li>
   );

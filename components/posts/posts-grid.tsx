@@ -1,19 +1,12 @@
+import { IPost } from "../../types/posts";
 import Post from "./post";
 import classes from "./posts-grid.module.css";
 
-export type Post = {
-  title: string;
-  image: string;
-  description: string;
-  date: string;
-  slug: string;
-};
+interface IPostsGridProps {
+  posts: IPost[];
+}
 
-type PostsGridProps = {
-  posts: Post[];
-};
-
-function PostsGrid(props:PostsGridProps) {
+function PostsGrid(props: IPostsGridProps) {
   const { posts } = props;
 
   return (
