@@ -1,18 +1,35 @@
-import Head from 'next/head'
-import Image from 'next/image'
-import { Fragment } from 'react'
-import FeaturedPost from '../components/featured-posts/featured-posts'
-import Hero from '../components/hero/hero'
-import styles from '../styles/Home.module.css'
-import { DUMMY_POSTS } from '../utils/DUMMY_DATA'
+import { Fragment } from "react";
+import FeaturedPost from "../components/featured-posts/featured-posts";
+import Hero from "../components/hero/hero";
+import { getFeaturedPosts } from "../lib/posts-util";
+import { IPost } from "../types/posts";
+interface IHomePageProps {
+  posts: IPost[];
+}
 
+function HomePage(props: IHomePageProps) {
 
-
-export default function HomePage() {
   return (
     <Fragment>
-    <Hero/>
-    <FeaturedPost posts={DUMMY_POSTS}/>
+      <Hero />
+      <FeaturedPost posts={props.posts} />
     </Fragment>
-    )
+  );
 }
+
+// use getStatisProps cause the data almost never change
+
+export function getStaticProps() {
+  const featuredPosts = getFeaturedPosts();
+
+  return {
+    props: {
+      posts: featuredPosts,
+    },
+    revalidate: 1800, // telling nextjs to not only execute once during build proccess but also every 100 sec
+    //this is to ensure our data would still be updated on the client side even after deployment
+    // if you dont write revalidate, then after build deployment, there wont be any change to the data
+  };
+}
+
+export default HomePage;

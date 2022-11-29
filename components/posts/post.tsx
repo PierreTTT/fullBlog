@@ -15,7 +15,6 @@ function Post(props: IPostProps) {
     month: "long",
     year: "numeric",
   });
-
   const imagePath = `/images/${image}`;
   const linkPath = `/posts/${slug}`;
 

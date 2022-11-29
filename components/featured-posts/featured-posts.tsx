@@ -1,8 +1,9 @@
-import PostsGrid, { Post } from '../posts/posts-grid';
+import { IPost } from '../../types/posts';
+import PostsGrid from '../posts/posts-grid';
 import classes from './featured-posts.module.css';
 
 type FeaturedProps = {
-    posts:Post[];
+    posts:IPost[];
 }
 
 function FeaturedPost(props:FeaturedProps){
