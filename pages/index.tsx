@@ -1,3 +1,4 @@
+import Head from "next/head";
 import { Fragment } from "react";
 import FeaturedPost from "../components/featured-posts/featured-posts";
 import Hero from "../components/hero/hero";
@@ -11,6 +12,10 @@ function HomePage(props: IHomePageProps) {
 
   return (
     <Fragment>
+      <Head>
+        <title>Luke's Blog</title>
+        <meta name="description" content=" Nutrition, Programming, Blockchain" />
+      </Head>
       <Hero />
       <FeaturedPost posts={props.posts} />
     </Fragment>
@@ -21,7 +26,7 @@ function HomePage(props: IHomePageProps) {
 
 export function getStaticProps() {
   const featuredPosts = getFeaturedPosts();
-  
+
 
   return {
     props: {

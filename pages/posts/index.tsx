@@ -1,9 +1,23 @@
+import Head from "next/head";
+import { Fragment } from "react";
 import AllPosts from "../../components/posts/all-posts";
 import { getAllPosts } from "../../lib/posts-util";
-import { DUMMY_POSTS } from "../../utils/DUMMY_DATA";
+import { IPost } from "../../types/posts";
 
-function AllPostsPage() {
-  return <AllPosts posts={DUMMY_POSTS} />;
+interface IAllPostsPageProps {
+  posts:IPost[];
+}
+
+function AllPostsPage(props:IAllPostsPageProps) {
+  return (
+    <Fragment>
+      <Head>
+        <title>All Posts</title>
+        <meta name="description" content="All posts"/>
+      </Head>
+      <AllPosts posts={props.posts} />
+    </Fragment>
+  );
 }
 
 export function getStaticProps() {
@@ -11,9 +25,9 @@ export function getStaticProps() {
 
   return {
     props: {
-      posts: allPosts
-    }
-  }
+      posts: allPosts,
+    },
+  };
 }
 
 export default AllPostsPage;

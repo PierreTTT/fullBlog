@@ -1,4 +1,5 @@
 import { GetStaticPaths, GetStaticProps, GetStaticPropsContext } from "next";
+import { Fragment } from "react";
 import PostContent from "../../components/posts/post-content";
 import { getPostData, getPostsFiles } from "../../lib/posts-util";
 import { IParams } from "../../types/fetchData";
@@ -9,7 +10,10 @@ interface IPostPageProps{
 }
 
 function PostPage(props:IPostPageProps) {
-  return <PostContent post={props.post} />;
+  return (
+  <Fragment>
+  <PostContent post={props.post} />
+  </Fragment>)
 }
 
 export const getStaticProps: GetStaticProps = (context: GetStaticPropsContext) => {
