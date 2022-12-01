@@ -21,6 +21,7 @@ function HomePage(props: IHomePageProps) {
 
 export function getStaticProps() {
   const featuredPosts = getFeaturedPosts();
+  
 
   return {
     props: {

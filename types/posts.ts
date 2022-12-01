@@ -4,6 +4,7 @@ export interface IPost {
   description: string;
   date: string;
   slug: string;
+  content:string;
 }
 
 export interface IMarkdown {
